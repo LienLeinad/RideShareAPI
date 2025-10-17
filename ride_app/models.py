@@ -29,7 +29,7 @@ class User(BaseModelMixin, AbstractUser):
     )
 
 
-class Ride(BaseModelMixin, AbstractUser):
+class Ride(BaseModelMixin):
     status = models.CharField(
         max_length=50,
         choices=RideStatusChoices.choices,
