@@ -31,7 +31,7 @@ class User(BaseModelMixin, AbstractUser):
 
 class Ride(BaseModelMixin, AbstractUser):
     status = models.CharField(
-        ax_length=50,
+        max_length=50,
         choices=RideStatusChoices.choices,
         default=RideStatusChoices.NEW.value,
         db_index=True,
