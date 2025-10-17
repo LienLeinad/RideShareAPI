@@ -40,12 +40,16 @@ class Ride(BaseModelMixin, AbstractUser):
         to=User,
         related_name="rides_taken",
         db_index=True,
+        on_delete=models.SET_NULL,
+        null=True,
         limit_choices_to={"role": UserRoleChoices.RIDER.value},
     )
     driver = models.ForeignKey(
         to=User,
         related_name="rides_driven",
         db_index=True,
+        on_delete=models.SET_NULL,
+        null=True,
         limit_choices_to={"role": UserRoleChoices.DRIVER.value},
     )
     pickup_latitude = models.FloatField(default=0.0)
@@ -53,3 +57,10 @@ class Ride(BaseModelMixin, AbstractUser):
     dropoff_latitude = models.FloatField(default=0.0)
     dropoff_longitude = models.FloatField(default=0.0)
     pickup_time = models.DateTimeField(null=True, blank=True, db_index=True)
+
+
+class RideEvent(BaseModelMixin):
+    # NOTE: Overriding this from BaseModelMixin to add db index
+    created_at = models.DateTimeField(auto_now_add=True, db_index=True)
+    description = models.CharField(max_length=500, null=True, blank=True)
+    ride = models.ForeignKey(to=Ride, related_name="events", on_delete=models.CASCADE)
