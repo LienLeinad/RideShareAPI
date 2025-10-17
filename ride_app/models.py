@@ -4,19 +4,52 @@ from django.db import models
 from ride_app.mixins import BaseModelMixin
 
 
-class UserTypeChoices(models.TextChoices):
+class UserRoleChoices(models.TextChoices):
     ADMIN = "Admin", "Admin"
     RIDER = "Rider", "Rider"
     DRIVER = "Driver", "Driver"
 
 
+class RideStatusChoices(models.TextChoices):
+    NEW = "New", "New"
+    EN_ROUTE = "En Route", "En Route"
+    PICK_UP = "Pick Up", "Pick Up"
+    DROP_OFF = "Drop Off", "Drop Off"
+
+
 class User(BaseModelMixin, AbstractUser):
     phone_number = models.CharField(max_length=255, db_index=True)
     email = models.EmailField(null=True, blank=True, db_index=True)
-    user_type = models.CharField(
+    role = models.CharField(
         max_length=50,
-        choices=UserTypeChoices.choices,
+        choices=UserRoleChoices.choices,
         null=True,
         blank=True,
         db_index=True,
     )
+
+
+class Ride(BaseModelMixin, AbstractUser):
+    status = models.CharField(
+        ax_length=50,
+        choices=RideStatusChoices.choices,
+        default=RideStatusChoices.NEW.value,
+        db_index=True,
+    )
+    rider = models.ForeignKey(
+        to=User,
+        related_name="rides_taken",
+        db_index=True,
+        limit_choices_to={"role": UserRoleChoices.RIDER.value},
+    )
+    driver = models.ForeignKey(
+        to=User,
+        related_name="rides_driven",
+        db_index=True,
+        limit_choices_to={"role": UserRoleChoices.DRIVER.value},
+    )
+    pickup_latitude = models.FloatField(default=0.0)
+    pickup_longitude = models.FloatField(default=0.0)
+    dropoff_latitude = models.FloatField(default=0.0)
+    dropoff_longitude = models.FloatField(default=0.0)
+    pickup_time = models.DateTimeField(null=True, blank=True, db_index=True)
