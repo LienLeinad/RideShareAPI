@@ -39,6 +39,7 @@ INSTALLED_APPS = [
     "django.contrib.staticfiles",
     "debug_toolbar",
     "django_extensions",
+    "ipdb",
     "rest_framework",
     "rest_framework_simplejwt",
     "ride_app",
