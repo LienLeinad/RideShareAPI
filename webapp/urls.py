@@ -18,10 +18,14 @@ Including another URLconf
 from debug_toolbar.toolbar import debug_toolbar_urls
 from django.contrib import admin
 from django.urls import path
-from rest_framework_simplejwt.views import TokenObtainPairView, TokenRefreshView
+from rest_framework_simplejwt.views import TokenRefreshView
+
+from ride_app import views as ride_app_views
 
 urlpatterns = [
     path("admin/", admin.site.urls),
-    path("api/token/", TokenObtainPairView.as_view(), name="token_obtain_pair"),
+    path(
+        "api/token/", ride_app_views.UserLoginView.as_view(), name="token_obtain_pair"
+    ),
     path("api/token/refresh/", TokenRefreshView.as_view(), name="token_refresh"),
 ] + debug_toolbar_urls()
