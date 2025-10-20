@@ -36,10 +36,7 @@ class RideSerializer(ModelSerializer):
     rider = UserSerializer(required=False)
     driver = UserSerializer(required=False)
     todays_ride_events = RideEventSerializer(many=True, source="events")
-    driver_distance = serializers.SerializerMethodField()
-
-    def get_driver_distance(self, obj):
-        return obj.driver_distance if hasattr(obj, "driver_distance") else None
+    driver_distance = serializers.FloatField(required=False)
 
     class Meta:
         model = Ride
