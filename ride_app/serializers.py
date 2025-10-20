@@ -1,3 +1,4 @@
+from django.utils import timezone
 from rest_framework import serializers
 from rest_framework.exceptions import ValidationError
 from rest_framework.serializers import ModelSerializer
@@ -44,7 +45,10 @@ class RideEventSerialiezr(ModelSerializer):
 class RideSerializer(ModelSerializer):
     rider = UserSerializer(required=False)
     driver = UserSerializer(required=False)
-    ride_events = RideEventSerialiezr(many=True)
+    todays_ride_events = serializers.SerializerMethodField()
+
+    def get_todays_ride_events(self, obj: Ride):
+        return obj.events.filter(created_at__date=timezone.now().date())
 
     class Meta:
         model = Ride
