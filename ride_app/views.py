@@ -1,5 +1,6 @@
 from django.contrib.auth.views import LoginView
-from django.db.models import F, FloatField, QuerySet, Sum
+from django.db.models import F, FloatField, Prefetch, QuerySet, Sum
+from django.utils import timezone
 from django_filters.rest_framework import DjangoFilterBackend
 from rest_framework.filters import OrderingFilter
 from rest_framework.pagination import PageNumberPagination
@@ -7,7 +8,7 @@ from rest_framework.permissions import IsAuthenticated
 from rest_framework.viewsets import ModelViewSet
 
 from ride_app.forms import CustomAuthForm
-from ride_app.models import Ride
+from ride_app.models import Ride, RideEvent
 from ride_app.serializers import RideSerializer
 from ride_app.utils import haversine_db
 
@@ -17,7 +18,17 @@ class RideViewSet(ModelViewSet):
     permission_classes = (IsAuthenticated,)
     pagination_class = PageNumberPagination
     queryset = (
-        Ride.objects.all().prefetch_related("events").select_related("rider", "driver")
+        Ride.objects.all()
+        .prefetch_related(
+            Prefetch(
+                "events",
+                RideEvent.objects.filter(
+                    created_at__date__gte=timezone.now().date()
+                    - timezone.timedelta(hours=24)
+                ),
+            )
+        )
+        .select_related("rider", "driver")
     )
     filter_backends = [OrderingFilter, DjangoFilterBackend]
     ordering_fields = ["pickup_time", "driver_distance"]
