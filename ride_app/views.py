@@ -1,3 +1,4 @@
+from django.contrib.auth.views import LoginView
 from rest_framework.pagination import PageNumberPagination
 from rest_framework.permissions import IsAuthenticated
 from rest_framework.viewsets import ModelViewSet
@@ -13,3 +14,8 @@ class RideViewSet(ModelViewSet):
     queryset = (
         Ride.objects.all().prefetch_related("events").select_related("rider", "driver")
     )
+
+
+class CustomLoginView(LoginView):
+    template_name = "login.html"
+    # You can also override form_class, get_context_data, etc.
