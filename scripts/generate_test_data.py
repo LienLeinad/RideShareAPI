@@ -10,9 +10,16 @@
     python manage.py runscript scripts.generate_test_data_alot --script-args <n>
 """
 
+import random
+import string
+
 from django.utils import timezone
 
 from ride_app.models import Ride, RideEvent, RideStatusChoices, User, UserRoleChoices
+
+
+def generate_random_string(length=5):
+    return "".join(random.choices(string.ascii_letters, k=length))
 
 
 def run(*args):
@@ -31,6 +38,7 @@ def run(*args):
             first_name=f"test{i}",
             last_name="test",
             phone_number="+639171231234",
+            email=f"{generate_random_string()}+{i}@example.com",
             role=UserRoleChoices.RIDER.value,
         )
         driver = User.objects.create(
