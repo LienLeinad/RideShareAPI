@@ -1,17 +1,10 @@
+from django.contrib.auth.views import LoginView
 from rest_framework.pagination import PageNumberPagination
 from rest_framework.permissions import IsAuthenticated
 from rest_framework.viewsets import ModelViewSet
-from rest_framework_simplejwt.views import TokenObtainPairView
 
 from ride_app.models import Ride
-from ride_app.serializers import CustomTokenObtainPairSerializer, RideSerializer
-
-
-class UserLoginView(TokenObtainPairView):
-    serializer_class = CustomTokenObtainPairSerializer
-
-    def post(self, request, *args, **kwargs):
-        return super().post(request, *args, **kwargs)
+from ride_app.serializers import RideSerializer
 
 
 class RideViewSet(ModelViewSet):
@@ -21,3 +14,8 @@ class RideViewSet(ModelViewSet):
     queryset = (
         Ride.objects.all().prefetch_related("events").select_related("rider", "driver")
     )
+
+
+class CustomLoginView(LoginView):
+    template_name = "login.html"
+    # You can also override form_class, get_context_data, etc.
