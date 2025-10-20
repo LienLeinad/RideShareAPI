@@ -16,6 +16,7 @@ from ride_app.models import Ride, RideEvent, RideStatusChoices, User, UserRoleCh
 
 
 def run(*args):
+    ride_statuses = [choice[0] for choice in RideStatusChoices.choices]
     # Clear everything to keep db clean
     User.objects.exclude(is_superuser=True).delete()
     Ride.objects.all().delete()
@@ -51,7 +52,7 @@ def run(*args):
                 dropoff_latitude=321.0,
                 dropoff_longitude=321.0,
                 pickup_time=timezone.now(),
-                status=RideStatusChoices.DROP_OFF.value,
+                status=ride_statuses[j % 4],  # evenly spread the status of the rides
             )
             ride.events.create(description="Picked Up", created_at=timezone.now())
             ride.events.create(
