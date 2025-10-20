@@ -1,6 +1,6 @@
 """
     Generates n instances of rider/driver pairs,n/2 rides per pair, and n*3 ride events per ride
-    and 1 admin user
+    Assigns all superusers with role Admin to be able to log in the login page
     For example:
         n = 3
         total new users = 6 (3 riders, 3 Drivers)
