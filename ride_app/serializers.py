@@ -28,10 +28,14 @@ class UserSerializer(ModelSerializer):
             "date_joined",
             "updated_at",
             "created_at",
+            "last_login",
+            "is_superuser",
+            "groups",
+            "user_permissions",
         ]
 
 
-class RideEventSerialiezr(ModelSerializer):
+class RideEventSerializer(ModelSerializer):
     ride = serializers.SerializerMethodField()
 
     def get_ride(self, obj):
@@ -48,7 +52,10 @@ class RideSerializer(ModelSerializer):
     todays_ride_events = serializers.SerializerMethodField()
 
     def get_todays_ride_events(self, obj: Ride):
-        return obj.events.filter(created_at__date=timezone.now().date())
+        serializer = RideEventSerializer(
+            obj.events.filter(created_at__date=timezone.now().date()), many=True
+        )
+        return serializer.data
 
     class Meta:
         model = Ride
