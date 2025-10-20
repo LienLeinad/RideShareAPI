@@ -34,25 +34,24 @@ def run():
         role=UserRoleChoices.ADMIN.value,
     )
 
-    for i in range(100):
-        ride = Ride.objects.create(
-            rider=rider,
-            driver=driver,
-            pickup_latitude=123.0,
-            pickup_longitude=123.0,
-            dropoff_latitude=321.0,
-            dropoff_longitude=321.0,
-            pickup_time=timezone.now(),
-            status=RideStatusChoices.DROP_OFF.value,
-        )
-        ride.events.create(description="Picked Up", created_at=timezone.now())
-        ride.events.create(
-            ride=ride,
-            description="En Route",
-            created_at=timezone.now(),
-        )
-        ride.events.create(
-            ride=ride,
-            description="Dropped Off",
-            created_at=timezone.now(),
-        )
+    ride = Ride.objects.create(
+        rider=rider,
+        driver=driver,
+        pickup_latitude=123.0,
+        pickup_longitude=123.0,
+        dropoff_latitude=321.0,
+        dropoff_longitude=321.0,
+        pickup_time=timezone.now(),
+        status=RideStatusChoices.DROP_OFF.value,
+    )
+    ride.events.create(description="Picked Up", created_at=timezone.now())
+    ride.events.create(
+        ride=ride,
+        description="En Route",
+        created_at=timezone.now(),
+    )
+    ride.events.create(
+        ride=ride,
+        description="Dropped Off",
+        created_at=timezone.now(),
+    )
