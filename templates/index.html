@@ -1,0 +1,48 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <title>Hello World</title>
+</head>
+<body>
+    <h1>Hello, world!</h1>
+    <p>This is a simple HTML page.</p>
+
+    <button id="loadRides">Load rides</button>
+    <pre id="output" style="white-space: pre-wrap; border: 1px solid #ddd; padding: 8px; margin-top: 8px;"></pre>
+
+    <script>
+    // Inline JavaScript to call GET /ride/
+    async function fetchRides() {
+        const output = document.getElementById('output');
+        output.textContent = 'Loading...';
+        try {
+            const response = await fetch('/ride/', {
+                method: 'GET',
+                headers: {
+                    'Accept': 'application/json'
+                    // add Authorization or other headers here if needed
+                }
+            });
+
+            if (!response.ok) {
+                output.textContent = 'Error: ' + response.status + ' ' + response.statusText;
+                return;
+            }
+
+            const data = await response.json();
+            // Pretty-print JSON response
+            output.textContent = JSON.stringify(data, null, 2);
+        } catch (err) {
+            output.textContent = 'Request failed: ' + err.message;
+        }
+    }
+
+    document.getElementById('loadRides').addEventListener('click', fetchRides);
+
+    // Optionally auto-load on page load:
+    // window.addEventListener('DOMContentLoaded', fetchRides);
+    </script>
+</body>
+</html>

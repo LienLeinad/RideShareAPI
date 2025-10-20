@@ -34,4 +34,5 @@ urlpatterns = [
     ),
     path("api/token/refresh/", TokenRefreshView.as_view(), name="token_refresh"),
     path("", include(router.urls)),
+    path("debug", ride_app_views.DebugView.as_view()),
 ] + debug_toolbar_urls()
