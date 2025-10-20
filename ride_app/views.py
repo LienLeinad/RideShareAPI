@@ -19,8 +19,5 @@ class RideViewSet(ModelViewSet):
     permission_classes = (IsAuthenticated,)
     pagination_class = PageNumberPagination
     queryset = (
-        Ride.objects.all()
-        .prefetch_related("events")
-        .select_related("rider")
-        .select_related("driver")
+        Ride.objects.all().prefetch_related("events").select_related("rider", "driver")
     )
