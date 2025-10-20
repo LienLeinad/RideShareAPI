@@ -1,4 +1,4 @@
-"""Generates 1 instance of rider driver ride and 3 ride events"""
+"""Generates n instances of rider/driver pairs,n rides per pair, and n*3 ride events"""
 from django.utils import timezone
 
 from ride_app.models import Ride, RideEvent, RideStatusChoices, User, UserRoleChoices
