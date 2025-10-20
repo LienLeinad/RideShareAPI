@@ -1,4 +1,15 @@
-"""Generates n instances of rider/driver pairs,n rides per pair, and n*3 ride events"""
+"""
+    Generates n instances of rider/driver pairs,n rides per pair, and n*3 ride events per ride
+    and 1 admin user
+    For example:
+        n = 3
+        total new users = 6 (3 riders, 3 Drivers)
+        total new rides = 36 (6 per rider/driver pair)
+        total new ride events = 98 (3 per ride)
+    usage:
+    python manage.py runscript scripts.generate_test_data_alot --script-args <n>
+"""
+
 from django.utils import timezone
 
 from ride_app.models import Ride, RideEvent, RideStatusChoices, User, UserRoleChoices
