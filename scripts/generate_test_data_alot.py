@@ -4,11 +4,12 @@ from django.utils import timezone
 from ride_app.models import Ride, RideEvent, RideStatusChoices, User, UserRoleChoices
 
 
-def run():
+def run(*args):
     # Clear everything to keep db clean
     User.objects.exclude(is_superuser=True).delete()
     Ride.objects.all().delete()
     RideEvent.objects.all().delete()
+    iters = int(args[0])
     # Create an admin to test authentication
     User.objects.create(
         username="test_admin",
@@ -18,7 +19,7 @@ def run():
         phone_number="+639171234123",
         role=UserRoleChoices.ADMIN.value,
     )
-    for i in range(100):
+    for i in range(iters):
         rider = User.objects.create(
             username=f"test{i}",
             password="test1234!",
@@ -36,7 +37,7 @@ def run():
             role=UserRoleChoices.DRIVER.value,
         )
 
-        for j in range(100):
+        for j in range(iters):
             ride = Ride.objects.create(
                 rider=rider,
                 driver=driver,
