@@ -21,6 +21,7 @@ class RideViewSet(ModelViewSet):
     ordering_fields = [
         "pickup_time",
     ]
+    filterset_fields = ["status", "rider__email"]
     ordering = ["created_at"]
 
 
