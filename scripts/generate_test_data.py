@@ -4,8 +4,8 @@
     For example:
         n = 3
         total new users = 6 (3 riders, 3 Drivers)
-        total new rides = 36 (6 per rider/driver pair)
-        total new ride events = 98 (3 per ride)
+        total new rides = 60 (10 rides per pair)
+        total new ride events = 180 (3 events per ride)
     usage:
     python manage.py runscript scripts.generate_test_data_alot --script-args <n>
 """
