@@ -1,5 +1,4 @@
 from django.views.generic import TemplateView
-from rest_framework.pagination import PageNumberPagination
 from rest_framework.permissions import AllowAny
 from rest_framework.response import Response
 from rest_framework.viewsets import ModelViewSet
@@ -21,7 +20,6 @@ class RideViewSet(ModelViewSet):
     permission_classes = (
         AllowAny,
     )  # TODO: Put back to IsAuthenticated once done debugging
-    pagination_class = PageNumberPagination
     queryset = Ride.objects.none()
 
     def list(self, request, *args, **kwargs):
