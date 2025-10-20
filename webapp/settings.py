@@ -41,7 +41,6 @@ INSTALLED_APPS = [
     "django_extensions",
     "ipdb",
     "rest_framework",
-    "rest_framework_simplejwt",
     "ride_app",
 ]
 
