@@ -3,6 +3,7 @@ from rest_framework.pagination import PageNumberPagination
 from rest_framework.permissions import IsAuthenticated
 from rest_framework.viewsets import ModelViewSet
 
+from ride_app.forms import CustomAuthForm
 from ride_app.models import Ride
 from ride_app.serializers import RideSerializer
 
@@ -18,4 +19,4 @@ class RideViewSet(ModelViewSet):
 
 class CustomLoginView(LoginView):
     template_name = "login.html"
-    # You can also override form_class, get_context_data, etc.
+    form_class = CustomAuthForm

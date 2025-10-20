@@ -1,5 +1,5 @@
 """
-    Generates n instances of rider/driver pairs,n rides per pair, and n*3 ride events per ride
+    Generates n instances of rider/driver pairs,n/2 rides per pair, and n*3 ride events per ride
     and 1 admin user
     For example:
         n = 3
@@ -20,16 +20,9 @@ def run(*args):
     User.objects.exclude(is_superuser=True).delete()
     Ride.objects.all().delete()
     RideEvent.objects.all().delete()
-    iters = int(args[0])
-    # Create an admin to test authentication
-    User.objects.create(
-        username="test_admin",
-        password="Test1234!",
-        first_name="test",
-        last_name="admin",
-        phone_number="+639171234123",
-        role=UserRoleChoices.ADMIN.value,
-    )
+    iters = int(input("Enter number of iterations: "))
+    # Set all admin users to role = Admin
+    User.objects.filter(is_superuser=True).update(role=UserRoleChoices.ADMIN.value)
     for i in range(iters):
         rider = User.objects.create(
             username=f"test{i}",
@@ -48,7 +41,8 @@ def run(*args):
             role=UserRoleChoices.DRIVER.value,
         )
 
-        for j in range(iters):
+        num_rides = iters // 2 if iters > 1 else 1
+        for j in range(num_rides):
             ride = Ride.objects.create(
                 rider=rider,
                 driver=driver,
