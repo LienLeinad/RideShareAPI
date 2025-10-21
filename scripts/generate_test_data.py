@@ -14,6 +14,7 @@ import random
 import string
 
 from django.utils import timezone
+from freezegun import freeze_time
 
 from ride_app.models import Ride, RideEvent, RideStatusChoices, User, UserRoleChoices
 
@@ -63,19 +64,16 @@ def run(*args):
                 status=ride_statuses[j % 4],  # evenly spread the status of the rides
             )
             # NOTE: one event is created more than 24 hours ago, to test "todays_ride_events" field
-            ride.events.create(
-                description="Ride Created",
-                created_at=timezone.now() - timezone.timedelta(hours=25),
-            )
+            with freeze_time(timezone.now() - timezone.timedelta(hours=25)):
+                ride.events.create(
+                    description="Ride Created",
+                )
             ride.events.create(
                 description="Picked Up",
-                created_at=timezone.now(),
             )
             ride.events.create(
                 description="En Route",
-                created_at=timezone.now(),
             )
             ride.events.create(
                 description="Dropped Off",
-                created_at=timezone.now(),
             )
