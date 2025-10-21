@@ -85,12 +85,14 @@ The application will be available at `http://1227.0.0.1:8000/`. You can access t
     Filtering can be done via Query Parameters in the URL or in the browsable API page rendered by django rest framework.
 
     ### Ordering by pickup time
-
+    <img width="732" height="358" alt="image" src="https://github.com/user-attachments/assets/462a0f58-e08f-4ed0-84ae-89b32ddb3826" />
 
     ### Filtering by rider email
-    
+   
     The test data generation script will generate random string emails, you can choose any from the ride list API and plug it in the search filter
+    <img width="717" height="81" alt="image" src="https://github.com/user-attachments/assets/227ab634-2adb-4569-99f1-8916ca22b00c" />
 
     ### Filtering by Ride Status
+    <img width="736" height="97" alt="image" src="https://github.com/user-attachments/assets/0a9c696a-6730-4608-97ca-6f7a5ba74bcb" />
 
     
