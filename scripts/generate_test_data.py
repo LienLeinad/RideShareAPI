@@ -64,8 +64,12 @@ def run(*args):
             )
             # NOTE: one event is created more than 24 hours ago, to test "todays_ride_events" field
             ride.events.create(
-                description="Picked Up",
+                description="Ride Created",
                 created_at=timezone.now() - timezone.timedelta(hours=25),
+            )
+            ride.events.create(
+                description="Picked Up",
+                created_at=timezone.now(),
             )
             ride.events.create(
                 description="En Route",
