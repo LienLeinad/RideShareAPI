@@ -114,10 +114,11 @@ The application will be available at `http://1227.0.0.1:8000/`. You can access t
 
     URL: http://localhost:8000/ride/?driver_longitude=100.00&driver_latitude=100.00
 
-    result:
+    Result from sample ride:
+   
+    This will also populate the driver_distance in all rides in the API results, which then allows you to order them in ascending or descending order
+   
+    <img width="483" height="217" alt="image" src="https://github.com/user-attachments/assets/7c2720f6-7817-4632-b1ad-8cf8599e2e85" />
 
-
-
-    This will give a value for driver_distance in the response of the API. with this you may use the driver_distance field to order the data in ascending or descending order
 
     
