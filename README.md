@@ -104,3 +104,5 @@ The application will be available at `http://1227.0.0.1:8000/`. You can access t
     <img width="736" height="97" alt="image" src="https://github.com/user-attachments/assets/0a9c696a-6730-4608-97ca-6f7a5ba74bcb" />
 
     
+    <img width="1471" height="715" alt="image" src="https://github.com/user-attachments/assets/62c60cb5-9caa-4575-bacf-c8a3f0b2fe0d" />
+
