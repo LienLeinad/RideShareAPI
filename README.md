@@ -106,3 +106,18 @@ The application will be available at `http://1227.0.0.1:8000/`. You can access t
     
     <img width="1471" height="715" alt="image" src="https://github.com/user-attachments/assets/62c60cb5-9caa-4575-bacf-c8a3f0b2fe0d" />
 
+    ### Driver Distance 
+
+    If you manually add the query parameters ?driver_longitude=<float> and driver_latitude=<float> in the url, you'll be given a computed distance between the pickup point of the ride based on the pickup latitude and longitude. This is computed in the database using the haversine formula. More info on the haversine formula [here](https://www.movable-type.co.uk/scripts/latlong.html)
+
+    Example: Driver Location is 100.00 longitude and 100.00 latitude 
+
+    URL: http://localhost:8000/ride/?driver_longitude=100.00&driver_latitude=100.00
+
+    result:
+
+
+
+    This will give a value for driver_distance in the response of the API. with this you may use the driver_distance field to order the data in ascending or descending order
+
+    
