@@ -61,9 +61,24 @@ The application will be available at `http://1227.0.0.1:8000/`. You can access t
 1.  **Log In:**
     Navigate to `http://127.0.0.1:8000/login` in your web browser.
     Enter the username and password you created during the `createsuperuser` step.
+    <img width="658" height="236" alt="image" src="https://github.com/user-attachments/assets/061805df-d607-4bc2-a552-9f67b859142a" />
 
-2.  **View the Ride List API:**
+
+3.  **View the Ride List API:**
     After a successful login, you will be redirected to the ride list API. This is the main feature of the application, where you can view the created rides generated from the test script.
+    <img width="1594" height="828" alt="image" src="https://github.com/user-attachments/assets/c0ecd00a-ba75-426e-8043-42ea929a6345" />
 
-3. ** Django Debug Toolbar **
-    
+
+4. ** Django Debug Toolbar **
+   If it did not already show up on the screen, click the Django Debug Toolbar Side button to reveal the debug panel. This will help show how many queries are made in the API request
+    <img width="229" height="159" alt="image" src="https://github.com/user-attachments/assets/e9c17cdf-5ff5-4878-a5a4-a26a9cb4bb33" />
+    <img width="408" height="697" alt="image" src="https://github.com/user-attachments/assets/7c6560ef-861b-4276-9b7b-1ed4d01853aa" />
+
+    Clicking the SQL tab will explain what queries were made in better detail.
+   <img width="1606" height="383" alt="image" src="https://github.com/user-attachments/assets/331091f0-5b30-4844-9323-e368447997fe" />
+    The first two queries made are necessary authentication queries, to ensure that the user in the request is authenticated
+    The next three queries are what make up the results of the API request. The first being a count of all the results from the Ride List API.
+    The next being a query to retrieve the first 20 rides in the database alongside their respective Rider and Driver information
+    The last query is a query to retrieve the associated ride events of each of the rides given in the prior query.
+5. ** Filters and Ordering **
+    Filtering can be done via Query Parameters in the URL or in the 
