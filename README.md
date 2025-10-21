@@ -71,7 +71,7 @@ The application will be available at `http://1227.0.0.1:8000/`. You can access t
     <img width="1594" height="828" alt="image" src="https://github.com/user-attachments/assets/c0ecd00a-ba75-426e-8043-42ea929a6345" />
 
 
-5. ** Django Debug Toolbar **
+5. **Django Debug Toolbar**
    If it did not already show up on the screen, click the Django Debug Toolbar Side button to reveal the debug panel. This will help show how many queries are made in the API request
    
     <img width="229" height="159" alt="image" src="https://github.com/user-attachments/assets/e9c17cdf-5ff5-4878-a5a4-a26a9cb4bb33" />
@@ -85,7 +85,7 @@ The application will be available at `http://1227.0.0.1:8000/`. You can access t
     The next three queries are what make up the results of the API request. The first being a count of all the results from the Ride List API.
     The next being a query to retrieve the first 20 rides in the database alongside their respective Rider and Driver information
     The last query is a query to retrieve the associated ride events of each of the rides given in the prior query.
-7. ** Filters and Ordering **
+7. **Filters and Ordering**
 
     Filtering can be done via Query Parameters in the URL or in the browsable API page rendered by django rest framework.
 
