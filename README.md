@@ -81,4 +81,16 @@ The application will be available at `http://1227.0.0.1:8000/`. You can access t
     The next being a query to retrieve the first 20 rides in the database alongside their respective Rider and Driver information
     The last query is a query to retrieve the associated ride events of each of the rides given in the prior query.
 5. ** Filters and Ordering **
-    Filtering can be done via Query Parameters in the URL or in the 
+
+    Filtering can be done via Query Parameters in the URL or in the browsable API page rendered by django rest framework.
+
+    ### Ordering by pickup time
+
+
+    ### Filtering by rider email
+    
+    The test data generation script will generate random string emails, you can choose any from the ride list API and plug it in the search filter
+
+    ### Filtering by Ride Status
+
+    
