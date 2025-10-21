@@ -28,10 +28,11 @@ def haversine_db(lat1, lon1, lat2, lon2):
 
 
 # NOTE: implementing non-db version for testing
+# source for haversine code: https://stackoverflow.com/a/4913653
 def haversine(lat1, lon1, lat2, lon2):
     """
     Calculate the great-circle distance between two points
-    on a sphere given their longitudes and latitudes.
+    on a sphere given their longitudes and latitudes. (Using Decimal Degrees)
     """
     # Convert latitude and longitude from degrees to radians
     lat1, lon1, lat2, lon2 = map(radians, [lat1, lon1, lat2, lon2])
