@@ -62,14 +62,16 @@ def run(*args):
                 pickup_time=timezone.now(),
                 status=ride_statuses[j % 4],  # evenly spread the status of the rides
             )
-            ride.events.create(description="Picked Up", created_at=timezone.now())
+            # NOTE: one event is created more than 24 hours ago, to test "todays_ride_events" field
             ride.events.create(
-                ride=ride,
+                description="Picked Up",
+                created_at=timezone.now() - timezone.timedelta(hours=25),
+            )
+            ride.events.create(
                 description="En Route",
                 created_at=timezone.now(),
             )
             ride.events.create(
-                ride=ride,
                 description="Dropped Off",
                 created_at=timezone.now(),
             )
