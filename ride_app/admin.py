@@ -1,8 +1,22 @@
 from django.contrib import admin
+from django.contrib.admin import ModelAdmin, TabularInline
 from django.contrib.auth.admin import UserAdmin
 from django.utils.translation import gettext_lazy as _
 
 from ride_app.models import Ride, RideEvent, User
+
+
+class RideEventInline(TabularInline):
+    can_delete = False
+
+    def has_add_permission(self, request, obj):
+        return False
+
+    def has_change_permission(self, request, obj):
+        return False
+
+    model = RideEvent
+    readonly_fields = fields = ["description", "created_at"]
 
 
 # Register your models here.
@@ -36,5 +50,9 @@ class UserAdmin(UserAdmin):
     )
 
 
-admin.site.register(Ride)
+@admin.register(Ride)
+class RideAdmin(ModelAdmin):
+    inlines = [RideEventInline]
+
+
 admin.site.register(RideEvent)
