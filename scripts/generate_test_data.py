@@ -1,11 +1,11 @@
 """
-    Generates n instances of rider/driver pairs,n/2 rides per pair, and n*3 ride events per ride
+    Generates n instances of rider/driver pairs,n/2 rides per pair, and n*4 ride events per ride
     Assigns all superusers with role Admin to be able to log in the login page
     For example:
         n = 3
         total new users = 6 (3 riders, 3 Drivers)
         total new rides = 60 (10 rides per pair)
-        total new ride events = 180 (3 events per ride)
+        total new ride events = 240 (4 events per ride) (one created 25 hours from time of running the script)
     usage:
     python manage.py runscript scripts.generate_test_data_alot --script-args <n>
 """
