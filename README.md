@@ -121,7 +121,7 @@ The application will be available at `http://1227.0.0.1:8000/`. You can access t
     <img width="483" height="217" alt="image" src="https://github.com/user-attachments/assets/7c2720f6-7817-4632-b1ad-8cf8599e2e85" />
 
 
-Bonus SQL For Rider data:
+Bonus SQL For Driver data:
 ```SQL
 SELECT
 strftime('%Y-%m', ride.pickup_time) AS Month,
