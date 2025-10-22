@@ -2,6 +2,7 @@ from django.contrib.auth.views import LoginView
 from django.db.models import Prefetch
 from django.utils import timezone
 from django_filters.rest_framework import DjangoFilterBackend
+from rest_framework.exceptions import ValidationError
 from rest_framework.filters import OrderingFilter
 from rest_framework.pagination import PageNumberPagination
 from rest_framework.permissions import IsAuthenticated
@@ -40,8 +41,17 @@ class RideViewSet(ModelViewSet):
         qs = super().get_queryset()
         longitude = self.request.query_params.get("driver_longitude")
         latitude = self.request.query_params.get("driver_latitude")
+
         if longitude and latitude:
-            qs = qs.annotate_driver_distance(float(longitude), float(latitude))
+            try:
+                longitude = float(longitude)
+                latitude = float(latitude)
+                qs = qs.annotate_driver_distance(longitude, latitude)
+            except ValueError:
+                raise ValidationError(
+                    {"detail": "Invalid longitude or latitude provided."}
+                )
+
         return qs
 
     def list(self, request, *args, **kwargs):
