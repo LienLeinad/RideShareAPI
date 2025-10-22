@@ -151,7 +151,8 @@ For easier execution, you may run the following commands
 ```
 
 This will produce a CSV file containing the results of the query
-<img width="603" height="257" alt="image" src="https://github.com/user-attachments/assets/a43a6cca-26fc-4ffb-8c96-80657fedddb1" />
+<img width="672" height="613" alt="image" src="https://github.com/user-attachments/assets/46b5230b-b8cf-4315-8f6c-b5152150f69d" />
+
 
 
     
