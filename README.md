@@ -46,7 +46,7 @@ The project includes a script to populate the database with sample data.
 ```bash
 python manage.py runscript generate_test_data
 ```
-You will be prompted to enter the number of iterations to generate data for. A good starting point is 10 but you can go as high as 50 without any problems. This may take a minute or two to finish
+You will be prompted to enter the number of iterations to generate data for and if you'd want to create pick up dates randomly or just today. A good starting point is 10 but you can go as high as 50 without any problems. This may take a minute or two to finish. For the purposes of testing you can pick the non-random pick up dates, to be able to test the ride event filtering in the API. For testing the SQL query, it's better to generate the random dates.
 
 ### 8. Run the Development Server
 Start the Django development server.
@@ -144,8 +144,9 @@ Driver;
 
 ```
 
-For easier execution, you may run the following command (after generating test data)
+For easier execution, you may run the following commands
 ```bash
+./manage.py generate_test_data # Choose any number of iterations and pick "y" for random dates to get a better spread of data in the csv
 ./manage.py generate_long_rides_report
 ```
 
