@@ -23,6 +23,10 @@ def generate_random_string(length=5):
     return "".join(random.choices(string.ascii_letters, k=length))
 
 
+# Generate a list of 7 days in a week to spread the dates of the ride's pick up through 7 days
+days_in_a_week = [timezone.now() - timezone.timedelta(days=i) for i in range(7)]
+
+
 def run(*args):
     ride_statuses = [choice[0] for choice in RideStatusChoices.choices]
     # Clear everything to keep db clean
@@ -60,7 +64,9 @@ def run(*args):
                 pickup_longitude=123.0,
                 dropoff_latitude=321.0,
                 dropoff_longitude=321.0,
-                pickup_time=timezone.now(),
+                pickup_time=days_in_a_week[
+                    j % 7
+                ],  # evenly assign dates for pick up time
                 status=ride_statuses[j % 4],  # evenly spread the status of the rides
             )
             # NOTE: one event is created more than 24 hours ago, to test "todays_ride_events" field
