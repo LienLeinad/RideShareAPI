@@ -121,4 +121,35 @@ The application will be available at `http://1227.0.0.1:8000/`. You can access t
     <img width="483" height="217" alt="image" src="https://github.com/user-attachments/assets/7c2720f6-7817-4632-b1ad-8cf8599e2e85" />
 
 
+Bonus SQL For Rider data:
+```SQL
+SELECT
+    DATE(ride.pickup_time) AS Month,
+    driver_user.first_name || ' ' || driver_user.last_name AS Driver,
+    COUNT(ride.id) AS 'Count of Trips > 1 hr'
+FROM
+    ride_app_rideevent AS event
+INNER JOIN
+    ride_app_ride AS ride ON event.ride_id = ride.id
+INNER JOIN
+    ride_app_user AS driver_user ON ride.driver_id = driver_user.id
+WHERE
+    event.description LIKE '%dropped off%'
+    AND (
+        strftime('%s', event.created_at) - strftime('%s', ride.pickup_time)
+    ) > 3600
+GROUP BY
+    Month,
+    Driver;
+
+```
+
+For easier execution, you may run the following command (after generating test data)
+```bash
+./manage.py generate_long_rides_report
+```
+
+This will produce a CSV file containing the results of the query
+<img width="1045" height="412" alt="image" src="https://github.com/user-attachments/assets/419b3c65-994c-4821-9c38-9781aa6644fd" />
+
     
