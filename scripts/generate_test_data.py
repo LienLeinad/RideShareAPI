@@ -57,6 +57,7 @@ def run(*args):
 
         num_rides = iters // 2 if iters > 1 else 1
         for j in range(num_rides):
+            pickup_time = days_in_a_week[j % 7]
             ride = Ride.objects.create(
                 rider=rider,
                 driver=driver,
@@ -64,9 +65,7 @@ def run(*args):
                 pickup_longitude=123.0,
                 dropoff_latitude=321.0,
                 dropoff_longitude=321.0,
-                pickup_time=days_in_a_week[
-                    j % 7
-                ],  # evenly assign dates for pick up time
+                pickup_time=pickup_time,  # evenly assign dates for pick up time
                 status=ride_statuses[j % 4],  # evenly spread the status of the rides
             )
             # NOTE: one event is created more than 24 hours ago, to test "todays_ride_events" field
@@ -80,6 +79,10 @@ def run(*args):
             ride.events.create(
                 description="En Route",
             )
-            ride.events.create(
-                description="Dropped Off",
-            )
+            # Assign Drop off a random number of hours after pick up time
+            with freeze_time(
+                pickup_time + timezone.timedelta(hours=random.randint(2, 5))
+            ):
+                ride.events.create(
+                    description="Dropped Off",
+                )
