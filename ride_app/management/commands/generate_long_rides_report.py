@@ -12,7 +12,7 @@ class Command(BaseCommand):
 
         query = """
         SELECT
-            DATE(ride.pickup_time) AS Month,
+            strftime('%Y-%m', ride.pickup_time) AS Month,
             driver_user.first_name || ' ' || driver_user.last_name AS Driver,
             COUNT(ride.id) AS 'Count of Trips > 1 hr'
         FROM
@@ -22,7 +22,7 @@ class Command(BaseCommand):
         INNER JOIN
             ride_app_user AS driver_user ON ride.driver_id = driver_user.id
         WHERE
-            event.description LIKE '%dropped off%'
+            event.description LIKE '%Dropped Off%'
             AND (
                 strftime('%s', event.created_at) - strftime('%s', ride.pickup_time)
             ) > 3600
