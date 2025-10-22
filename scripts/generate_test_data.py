@@ -33,7 +33,12 @@ def run(*args):
     User.objects.exclude(is_superuser=True).delete()
     Ride.objects.all().delete()
     RideEvent.objects.all().delete()
-    iters = int(input("Enter number of iterations: "))
+    while True:
+        try:
+            iters = int(input("Enter number of iterations: "))
+            break
+        except ValueError:
+            print("Invalid input. Please enter a valid integer.")
     # Set all admin users to role = Admin
     User.objects.filter(is_superuser=True).update(role=UserRoleChoices.ADMIN.value)
     for i in range(iters):
