@@ -7,7 +7,7 @@
         total new rides = 60 (10 rides per pair)
         total new ride events = 240 (4 events per ride) (one created 25 hours from time of running the script)
     usage:
-    python manage.py runscript scripts.generate_test_data_alot --script-args <n>
+    python manage.py runscript generate_test_data
 """
 
 import random
