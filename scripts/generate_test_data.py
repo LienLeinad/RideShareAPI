@@ -99,7 +99,7 @@ def run(*args):
                 status=ride_statuses[j % 4],  # evenly spread the status of the rides
             )
             # NOTE: one event is created more than 24 hours ago, to test "todays_ride_events" field
-            with freeze_time(pickup_time - timezone.timedelta(hours=25)):
+            with freeze_time(pickup_time - timezone.timedelta(hours=45)):
                 ride.events.create(
                     description="Ride Created",
                 )
