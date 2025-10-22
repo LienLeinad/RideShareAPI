@@ -1,6 +1,7 @@
 from django.contrib.auth.models import AbstractUser
 from django.db import models
 
+from ride_app.managers import RideQuerySet
 from ride_app.mixins import BaseModelMixin
 
 
@@ -30,6 +31,7 @@ class User(BaseModelMixin, AbstractUser):
 
 
 class Ride(BaseModelMixin):
+    objects = RideQuerySet.as_manager()
     status = models.CharField(
         max_length=50,
         choices=RideStatusChoices.choices,
