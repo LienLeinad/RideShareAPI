@@ -18,8 +18,8 @@ cd RideShareAPI
 ### 3. Create a Virtual Environment
 It's recommended to use a virtual environment to manage project dependencies.
 ```bash
-python -m venv venv
-source venv/bin/activate  # On Windows, use `venv\Scripts\activate`
+python -m venv .venv
+source .venv/bin/activate  # On Windows, use `.venv\Scripts\activate`
 ```
 
 ### 4. Install Dependencies
@@ -44,9 +44,9 @@ You will be prompted to enter a username, email, and password.
 ### 7. Generate Test Data
 The project includes a script to populate the database with sample data.
 ```bash
-python manage.py runscript scripts.generate_test_data
+python manage.py runscript generate_test_data
 ```
-You will be prompted to enter the number of iterations to generate data for.
+You will be prompted to enter the number of iterations to generate data for. A good starting point is 10 but you can go as high as 50 without any problems. This may take a minute or two to finish
 
 ### 8. Run the Development Server
 Start the Django development server.
