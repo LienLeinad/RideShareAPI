@@ -29,7 +29,7 @@ def haversine_db(lat1, lon1, lat2, lon2):
 
 # NOTE: implementing non-db version for testing
 # source for haversine code: https://stackoverflow.com/a/4913653
-def haversine(lat1, lon1, lat2, lon2):
+def haversine(lat1: float, lon1: float, lat2: float, lon2: float) -> float:
     """
     Calculate the great-circle distance between two points
     on a sphere given their longitudes and latitudes. (Using Decimal Degrees)
