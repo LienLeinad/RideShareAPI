@@ -81,7 +81,7 @@ def run(*args):
             )
             # Assign Drop off a random number of hours after pick up time
             with freeze_time(
-                pickup_time + timezone.timedelta(hours=random.randint(2, 5))
+                pickup_time + timezone.timedelta(hours=random.randint(0, 3))
             ):
                 ride.events.create(
                     description="Dropped Off",
