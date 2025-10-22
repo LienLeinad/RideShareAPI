@@ -30,4 +30,5 @@ urlpatterns = [
     path("admin/", admin.site.urls),
     path("", include(router.urls)),
     path("login", ride_app_views.CustomLoginView.as_view()),
+    path("", ride_app_views.CustomLoginView.as_view()),
 ] + debug_toolbar_urls()

@@ -39,6 +39,24 @@ def run(*args):
             break
         except ValueError:
             print("Invalid input. Please enter a valid integer.")
+
+    while True:
+        random_dates = str(
+            input(
+                "Do you want random pick up dates or all in 1 day? (y for random/n for 1 day): "
+            )
+        )
+        if random_dates.lower() == "y":
+            random_dates = True
+            break
+        elif random_dates.lower() == "n":
+            random_dates = False
+            break
+        else:
+            print(
+                "Invalid input, please enter a valid input y (for random) or n (for 1 day) only"
+            )
+
     # Set all admin users to role = Admin
     User.objects.filter(is_superuser=True).update(role=UserRoleChoices.ADMIN.value)
     for i in range(iters):
@@ -62,10 +80,14 @@ def run(*args):
 
         num_rides = iters // 2 if iters > 1 else 1
         for j in range(num_rides):
-            pickup_time = days_in_a_week[j % 7]
-            pickup_time = pickup_time - timezone.timedelta(
-                days=31 * random.randint(1, 5)
-            )
+            if random_dates:
+                pickup_time = days_in_a_week[j % 7]
+                pickup_time = pickup_time - timezone.timedelta(
+                    days=31 * random.randint(1, 5)
+                )
+            else:
+                pickup_time = timezone.now()
+
             ride = Ride.objects.create(
                 rider=rider,
                 driver=driver,
